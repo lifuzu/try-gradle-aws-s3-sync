@@ -4,7 +4,7 @@ Try gradle-aws-s3-sync - a gradle plugin to sync local to S3
 ### Prepare your local plugin
 *1*. Clone the repo:
 ```
-$ git clone https://github.com/lifuzu/gradle-aws-s3-sync.git
+$ git clone ...
 ```
 *2*. Build and Publish to Local Maven Repo
 ```
@@ -21,18 +21,23 @@ $ git clone https://github.com/lifuzu/try-gradle-aws-s3-sync.git
 awsAccessKey = <Your aws access key here>
 awsSecretKey = <Your AWS secret key here>
 ```
-*3*. Config your bintray access key in ~/.gradle/gradle.properties:
-```
-bintrayUser = <Your bintray user name here>
-bintrayKey = <Your bintray key here>
-```
-*4*. Config your bucket name in build.gradle, ln. 17, here:
+*3*. Config your bucket name in build.gradle, ln. 17, here:
 ```
 ext {
     aws = [accessKey: awsAccessKey, secretKey: awsSecretKey]
-    s3 = [bucket: "<your_bucket_name>/"]
+    s3 = [bucket: "<your_bucket_name>"]
     local = [directory: "pool"]
 }
+```
+
+### SUPPORTED FUNCTION LIST:
+```
+s3upload
+s3download
+s3delete
+s3delete -Pdestination=<file_name>
+s3purge
+s3list
 ```
 
 ### NOTE:
