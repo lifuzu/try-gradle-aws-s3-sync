@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.weimed.gradle-plugins:gradle-aws-s3-sync:0.7.2"
+        classpath "com.weimed.gradle-plugins:gradle-aws-s3-sync:0.7.+"
     }
 }
 
@@ -29,6 +29,18 @@ task s3upload(type: S3Sync){
 
     from local.directory
     into s3.bucket
+}
+
+task s3replace(type: S3Sync){
+    description = "Replace artifacts on a s3 bucket."
+
+    accessKey aws.accessKey
+    secretKey aws.secretKey
+
+    configFile "synchronizer.properties"
+
+    from local.directory + "/latest"
+    into s3.bucket + "/latest"
 }
 
 task s3download(type: S3Sync){
@@ -69,7 +81,7 @@ task s3purge(type: S3Purge) {
 
     configFile "synchronizer.properties"
 
-    from s3.bucket
+    from s3.bucket + '/snapshot'
 }
 
 task s3list(type: S3List) {
